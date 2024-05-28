@@ -1,0 +1,87 @@
+<div class="row mt-4">
+  <div class="col-md-4 offset-md-4">
+    <div class="card">
+      <div class="card-header text-center">
+        <h3 class="cupet">Registrar Vehículo</h3>
+      </div>
+      <div class="card-body text-center">
+        <form action="/registrar-vehiculo" method="post">
+          <img
+            class="mb-4"
+            src="/img/vehiculo-cupet.png"
+            alt=""
+            height="100"
+            width="100"
+          />
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Nombre"
+              />
+              <label for="floatingInput">Modelo</label>
+            </div>
+            <div class="row g-2">
+              <div class="col-md">
+                <div class="form-floating">
+                  <select class="form-select" id="floatingSelectGrid">
+                    <option selected></option>
+                    <option value="1">Automovil</option>
+                    <option value="2">Motocicleta</option>
+                    <option value="3">Camión</option>
+                    <option value="4">Omnibus</option>
+                  </select>
+                  <label for="floatingSelectGrid">Categoría</label>
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="form-floating">
+                  <select class="form-select" id="floatingSelectGrid">
+                    <option selected></option>
+                    <option value="1">Estatal</option>
+                    <option value="2">Particular</option>
+                  </select>
+                  <label for="floatingSelectGrid">Propiedad</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-floating">
+              <select class="form-select" id="floatingSelectGrid">
+                <option selected></option>
+                <option value="1">Diesel Regular</option>
+                <option value="2">Gasolina B94</option>
+                <option value="2">Gasolina B90</option>
+                <option value="2">Gasolina B83</option>
+              </select>
+              <label for="floatingSelectGrid">Tipo de Combustible</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Matrícula"
+              />
+              <label for="floatingInput">Matrícula</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Matrícula"
+              />
+              <label for="floatingInput">Capacidad de Combustible</label>
+            </div>
+          </div>
+          <button
+            class="w-100 btn btn-lg btn-success mt-3"
+            type="submit"
+          >Siguiente</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

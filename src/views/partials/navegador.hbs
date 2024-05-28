@@ -1,0 +1,62 @@
+<header
+  class="navbar navbar-dark nav-brand navbar-expand-sm sticky-top bg-dark flex-md-nowrap py-2 px-2 px-md-5 shadow"
+>
+  <div>
+    <button
+      class="d-md-none btn btn-dark"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offCanvasMenu"
+      aria-controls="offCanvasMenu"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/"><img
+        src="/img/cupet-logo.png"
+        alt=""
+        width="85"
+        height="46"
+      />
+      <span class="fuente-cupet">App</span></a>
+  </div>
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-md-flex">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="/"><i
+          class="bi bi-house-fill"
+        ></i>
+        Inicio</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="bi bi-ui-checks"></i> Opciones</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="bi bi-people-fill"></i>
+        Nosotros</a>
+    </li>
+  </ul>
+  <div class="dropstart">
+    <button
+      class="btn btn-secondary dropdown-toggle"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <i class="bi bi-person-circle"></i>
+    </button>
+    <ul class="dropdown-menu mt-5 ms-5">
+      <li><a class="dropdown-item" href="/autenticar-usuario"><i
+            class="bi bi-door-open-fill"
+          ></i>
+          Autenticar</a></li>
+      <li><a class="dropdown-item" href="/registrar-cliente"><i
+            class="bi bi-pencil-square"
+          ></i>
+          Registrar</a></li>
+      <hr class="dropdown-divider" />
+      <li><a class="dropdown-item" href="/cerrar-sesion"><i
+            class="bi bi-door-closed-fill"
+          ></i>
+          Cerrar Sesión</a></li>
+    </ul>
+  </div>
+</header>

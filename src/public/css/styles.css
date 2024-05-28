@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "Kanit-Regular";
+  src: url("/src/public/font/cupet/Kanit-Regular.ttf") format("truetype");
+  font-weight: 400; /* Peso de la fuente (Regular) */
+  font-style: normal; /* Estilo de la fuente (normal) */
+}
+
+.cupet-fuente {
+  font-family: "Kanit-Regular", sans-serif;
+}
+
+h3 {
+  color: #03602e;
+}

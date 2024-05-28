@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>CupetApp</title>
+    <style>
+        @media (max-width: 767.98px) {
+            .container-body {
+                margin-left: 0px;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {{>navegador}}
+    <div class="container-fluid">
+        <div class="row">
+            {{>menuLateral}}
+            {{{ body }}}
+        </div>
+    </div>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<div class="row mt-4">
+  <div class="col-md-4 offset-md-4">
+    <div class="card">
+      <div class="card-header text-center">
+        <h3>Registrar Usuario</h3>
+      </div>
+      <div class="card-body text-center">
+        <form name="registro" method="post">
+          <img
+            class="mb-4"
+            src="/img/usuario-perfil-cupet.png"
+            alt=""
+            height="100"
+            width="100"
+          />
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                name="usuario"
+                placeholder="Usuario"
+              />
+              <label for="floatingInput">Usuario</label>
+              <p id="mensaje-usuario"></p>
+            </div>
+            <div class="form-floating">
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Password"
+              />
+              <label for="password">Password</label>
+            </div>
+            <p id="mensaje-password">Password <span id="fortaleza"></span></p>
+          </div>
+          <button
+            class="w-100 btn btn-lg btn-success mt-3"
+            type="submit"
+          >Terminar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
