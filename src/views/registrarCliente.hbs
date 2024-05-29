@@ -5,7 +5,7 @@
         <h3>Registrar Cliente</h3>
       </div>
       <div class="card-body text-center">
-        <form action="/registrar-cliente" method="post">
+        <form id="formulario-cliente" action="/registrar-cliente" method="post">
           <img
             class="mb-4"
             src="/img/usuario-perfil-cupet.png"
@@ -23,57 +23,63 @@
                 placeholder="Nombre"
               />
               <label for="nombre">Nombre</label>
+              <p id="mensaje-nombre"><span id="infoNombre"></span></p>
             </div>
 
             <div class="form-floating">
               <input
                 type="text"
                 class="form-control"
-                id="floatingInput"
+                id="apellidos"
                 name="apellidos"
                 placeholder="Apellidos"
               />
-              <label for="floatingInput">Apellidos</label>
-            </div>
-            <div class="form-floating">
-              <input
-                type="text"
-                class="form-control is-invalid"
-                id="floatingInput"
-                name="CI"
-                placeholder="Carnet de Identidad"
-              />
-              <label for="floatingInput">Carnet de Identidad</label>
+              <label for="apellidos">Apellidos</label>
+              <p id="mensaje-apellidos"><span id="infoApellidos"></span></p>
             </div>
             <div class="form-floating">
               <input
                 type="text"
                 class="form-control"
-                id="floatingInput"
-                name="direccion"
-                placeholder="Dirección"
+                id="CI"
+                name="CI"
+                placeholder="Carnet de Identidad"
               />
-              <label for="floatingInput">Dirección</label>
-            </div>
-            <div class="form-floating">
-              <input
-                type="email"
-                class="form-control is-invalid"
-                id="floatingInput"
-                name="email"
-                placeholder="Correo Electrónico"
-              />
-              <label for="floatingInput">Correo Electrónico</label>
+              <label for="CI">Carnet de Identidad</label>
+              <p id="mensaje-CI"><span id="infoCI"></span></p>
             </div>
             <div class="form-floating">
               <input
                 type="text"
-                class="form-control is-invalid"
-                id="floatingInput"
+                class="form-control"
+                id="direccion"
+                name="direccion"
+                placeholder="Dirección"
+              />
+              <label for="direccion">Dirección</label>
+              <p id="mensaje-direccion"><span id="infoDireccion"></span></p>
+            </div>
+            <div class="form-floating">
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Correo Electrónico"
+              />
+              <label for="email">Correo Electrónico</label>
+              <p id="mensaje-email"><span id="infoEmail"></span></p>
+            </div>
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="telefono"
                 name="telefono"
                 placeholder="Teléfono"
               />
-              <label for="floatingInput">Teléfono</label>
+              <label for="telefono">Teléfono</label>
+              <p id="mensaje-telefono"><span id="infoTelefono"></span></p>
             </div>
           </div>
           <button

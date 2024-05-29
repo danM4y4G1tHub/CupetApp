@@ -44,10 +44,10 @@ app.set("view engine", ".hbs");
 /*
  * Variables globales
  */
-app.use((req, res, next) => {
-  res.locals.dataUsuario = req.user.dataValues;
-  next();
-});
+// app.use((req, res, next) => {
+//   res.locals.dataUsuario = req.user.dataValues;
+//   next();
+// });
 
 /*
  * Rutas
@@ -66,7 +66,7 @@ app.use(express.static(path.join(__dirname, "public")));
 async function main() {
   try {
     // Realiza consulta BD para comprobar conexión
-    await sequelize.sync({ force: false });
+    // await sequelize.sync({ force: false });
     console.log("Conexión a la BDs establecida 🚀");
 
     // Ejecuta el servidor de la aplicación

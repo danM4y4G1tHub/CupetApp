@@ -5,7 +5,7 @@
         <h3>Registrar Usuario</h3>
       </div>
       <div class="card-body text-center">
-        <form name="registro" method="post">
+        <form id="formulario-usuario" name="registro" method="post">
           <img
             class="mb-4"
             src="/img/usuario-perfil-cupet.png"
@@ -18,12 +18,12 @@
               <input
                 type="text"
                 class="form-control"
-                id="floatingInput"
+                id="usuario"
                 name="usuario"
                 placeholder="Usuario"
               />
-              <label for="floatingInput">Usuario</label>
-              <p id="mensaje-usuario"></p>
+              <label for="usuario">Usuario</label>
+              <p id="mensaje-usuario"><span id="info"></span></p>
             </div>
             <div class="form-floating">
               <input
@@ -35,7 +35,7 @@
               />
               <label for="password">Password</label>
             </div>
-            <p id="mensaje-password">Password <span id="fortaleza"></span></p>
+            <p id="mensaje-password"><span id="fortaleza"></span></p>
           </div>
           <button
             class="w-100 btn btn-lg btn-success mt-3"

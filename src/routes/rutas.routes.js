@@ -12,7 +12,7 @@ router
   .get("/", ControladorVistas.index)
   .get("/registrar-cliente", ControladorUsuario.vistaRegistrarCliente)
   .post("/registrar-cliente", ControladorUsuario.registrarCliente)
-  .post("/registrar-usuario", ControladorUsuario.registrarUsuario)
+  .get("/registrar-usuario", ControladorUsuario.registrarUsuario)
   .get("/autenticar-usuario", ControladorAutenticar.autenticarUsuario)
   .post("/autenticar-usuario", ControladorAutenticar.autenticar)
   .get("/cargar-panel-control", ControladorAutenticar.cargarPanelControl)
