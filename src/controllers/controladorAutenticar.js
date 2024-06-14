@@ -28,8 +28,12 @@ ControladorAutenticar.cargarPanelControl = async (req, res) => {
 };
 
 ControladorAutenticar.cerrarSesion = (req, res) => {
-  req.logOut();
-  res.redirect("/");
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
 };
 
 module.exports = {

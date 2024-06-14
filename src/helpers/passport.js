@@ -35,6 +35,4 @@ passport.deserializeUser(async (id, done) => {
   done(null, user);
 });
 
-const passportInstance = { passport };
-
-module.exports = { passportInstance };
+module.exports = { passport };

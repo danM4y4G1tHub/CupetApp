@@ -12,7 +12,7 @@ router
   .get("/", ControladorVistas.index)
   .get("/registrar-cliente", ControladorUsuario.vistaRegistrarCliente)
   .post("/registrar-cliente", ControladorUsuario.registrarCliente)
-  .get("/registrar-usuario", ControladorUsuario.registrarUsuario)
+  .post("/registrar-usuario", ControladorUsuario.registrarUsuario)
   .get("/autenticar-usuario", ControladorAutenticar.autenticarUsuario)
   .post("/autenticar-usuario", ControladorAutenticar.autenticar)
   .get("/cargar-panel-control", ControladorAutenticar.cargarPanelControl)
@@ -23,5 +23,9 @@ router
   .get("/listar-vehiculos", ControladorVehiculo.listarVehiculos)
   .get("/pedir-ticket")
   .get("/panel-control", ControladorVistas.panelControl);
+// TODO: hacer pagina 404
+// .get("/*", (req, res) => {
+//   return res.json({ message: "404" });
+// });
 
 module.exports = { router };

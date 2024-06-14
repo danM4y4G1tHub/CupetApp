@@ -28,9 +28,9 @@ ControladorUsuario.registrarCliente = async (req, res) => {
 
 ControladorUsuario.registrarUsuario = async (req, res) => {
   usuario.usuario = req.body.usuario;
-  usuario.user = req.body.password;
+  usuario.password = req.body.password;
   if (await Usuario.crearUsuario(usuario)) {
-    // res.redirect("cargar-panel-control");
+    res.redirect("cargar-panel-control");
   }
 };
 

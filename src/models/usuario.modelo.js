@@ -54,6 +54,7 @@ const UsuarioModelo = sequelize.define(
 UsuarioModelo.beforeCreate(async (user) => {
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+  console.log({ user, hashedPassword });
   user.password = hashedPassword;
 });
 
@@ -135,16 +136,16 @@ Usuario.validarUsuario = async (usuario) => {
 
 Usuario.validarPassword = async (usuario, password) => {
   try {
-    const pass = await UsuarioModelo.findOne(
-      {
-        where: { usuario },
-      },
-      { attributes: ["password"] },
-    );
+    const pass = await UsuarioModelo.findOne({
+      where: { usuario },
+      raw: true,
+      attributes: ["password"],
+    });
+    console.log({ pass });
+    const correcto = await bcrypt.compare(password, pass.password);
+    if (correcto) return true;
 
-    const correcto = await bcrypt.compare(hashedPassword, pass.password);
-
-    return true;
+    return false;
   } catch (error) {
     console.log(error);
   }
@@ -155,6 +156,7 @@ Usuario.obtenerUsuario = async (id) => {
     const datos = await UsuarioModelo.findByPk(id, {
       attributes: ["id", "usuario", "rol"],
     });
+
     return datos;
   } catch (error) {
     console.log(error);
