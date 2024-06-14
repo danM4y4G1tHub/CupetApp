@@ -14,7 +14,6 @@ breadcrumbHtml.insertBefore(inicioListItem, breadcrumbHtml.firstChild);
 const pathName = window.location.pathname;
 const pathNameSplitted = pathName.split("/");
 
-const breadCrumbData = [];
 pathNameSplitted.forEach((path, index) => {
   if (!path) return;
 
