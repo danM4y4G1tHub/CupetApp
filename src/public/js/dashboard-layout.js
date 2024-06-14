@@ -18,6 +18,8 @@ const breadCrumbData = [];
 pathNameSplitted.forEach((path, index) => {
   if (!path) return;
 
+  const href = pathName.split(path)[0] + path;
+
   // Creamos el elemento <li> con la clase breadcrumb-item
   const listItem = document.createElement("li");
   listItem.className = "breadcrumb-item"; // Añadimos la clase breadcrumb-item
@@ -27,7 +29,7 @@ pathNameSplitted.forEach((path, index) => {
 
   // Creamos el elemento <a> o <span> para el nombre de la ruta
   let linkOrSpan = document.createElement(isActive ? "span" : "a"); // Si es el último, usamos span, de lo contrario, un enlace
-  linkOrSpan.href = path; // Establecemos el href solo si no es el último elemento
+  linkOrSpan.href = href; // Establecemos el href solo si no es el último elemento
   linkOrSpan.textContent = routesLabels[path]; // Asignamos el texto del nombre de la ruta
 
   // Si el elemento es activo, añadimos el atributo aria-current="page"
@@ -41,11 +43,4 @@ pathNameSplitted.forEach((path, index) => {
 
   // Agregamos el <li> al breadcrumbHtml
   breadcrumbHtml.appendChild(listItem);
-
-  // Si no es el último elemento, agregamos una separación
-  if (!isActive) {
-    const separator = document.createElement("span");
-    separator.textContent = " > "; // O cualquier otro separador que desees usar
-    listItem.appendChild(separator);
-  }
 });
