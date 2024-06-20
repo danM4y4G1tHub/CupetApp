@@ -24,18 +24,10 @@
     <div class="container-fluid">
         <div class="row">
             {{>menuLateral}}
-            
-             
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="mt-3">
-                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                        <ol class="breadcrumb" id="breadcrumb">
-                            
-                        </ol>
-                        </nav>
-                    </div>
-            {{{ body }}}
-        </main>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                {{>caminoMigajas}}
+                {{{ body }}}
+            </main>
         </div>
     </div>
     <script src="/js/bootstrap.min.js"></script>

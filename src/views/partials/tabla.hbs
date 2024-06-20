@@ -1,0 +1,102 @@
+{{#if user}}
+  <h3>Datos de los Usuarios</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">CI</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Rol</th>
+        </tr>
+      </thead>
+      {{#each datos}}
+        <tr>
+          <td>{{this.nombre}}</td>
+          <td>{{this.apellidos}}</td>
+          <td>{{this.CI}}</td>
+          <td>{{this.direccion}}</td>
+          <td>{{this.telefono}}</td>
+          <td>{{this.rol}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
+{{/if}}
+
+{{#if movil}}
+  <h3>Datos de los Vehiculos</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Modelo</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Propiedad</th>
+          <th scope="col">Tipo de Gasolina</th>
+          <th scope="col">Matrícula</th>
+          <th scope="col">Capacidad</th>
+        </tr>
+      </thead>
+      {{#each datos}}
+        <tr>
+          <td>{{this.modelo}}</td>
+          <td>{{this.categoria}}</td>
+          <td>{{this.propiedad}}</td>
+          <td>{{this.tipo}}</td>
+          <td>{{this.matricula}}</td>
+          <td>{{this.capacidad}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
+{{/if}}
+
+{{#if comb}}
+  <h3>Datos de los Combustibles</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Tipo de Combustible</th>
+          <th scope="col">Cantidad Disponible</th>
+          <th scope="col">Precio</th>
+        </tr>
+      </thead>
+      {{#each datos}}
+        <tr>
+          <td>{{this.tipo}}</td>
+          <td>{{this.cantidad}}</td>
+          <td>{{this.precio}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
+{{/if}}
+
+{{#if recepcion}}
+  <h3>Datos de los Abstecimientos de Combustible del Cupet
+    {{nombreEstablecimiento}}</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Nombre del Distribuidor</th>
+          <th scope="col">Nombre del Administrador</th>
+          <th scope="col">Cantidad Abastecida</th>
+          <th scope="col">Tipo</th>
+        </tr>
+      </thead>
+      {{#each datos}}
+        <tr>
+          <td>{{this.nombreDistribuidor}}</td>
+          <td>{{this.nombreAdministrador}}</td>
+          <td>{{this.cantidadCombustible}}</td>
+          <td>{{this.tipo}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
+{{/if}}

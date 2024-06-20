@@ -3,6 +3,7 @@ const { DataTypes } = require("sequelize");
 const { TicketModelo } = require("./ticket.modelo");
 const { FacturaRecepcionModelo } = require("./facturaRecepcion.modelo");
 const { FacturaCompraModelo } = require("./facturaCompra.modelo");
+const { raw } = require("express");
 
 // Definición de la tabla Combustible
 const CombustibleModelo = sequelize.define(
@@ -66,8 +67,40 @@ Combustible.despacharCombustible = (body) => {
   }
 };
 
-Combustible.abastecerCombustible = (body) => {
+Combustible.obtenerCombustible = async (body) => {
   try {
+    const comb = await CombustibleModelo.findOne({
+      where: {
+        tipo: body.tipo,
+      },
+      raw: true,
+      attributes: ["id", "cantidad"],
+    });
+
+    return comb;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+Combustible.abastecerCombustible = async (body) => {
+  try {
+    const { id, cantidad } = await Combustible.obtenerCombustible(body);
+    let nueva = 0;
+    nueva += cantidad + Number(body.cantidad);
+    const datos = await CombustibleModelo.update(
+      {
+        cantidad: nueva,
+      },
+      {
+        where: { tipo: body.tipo },
+      },
+    );
+
+    if (datos === null) {
+      return { actualizado: false };
+    }
+    return { actualizado: true, idComb: id };
   } catch (error) {
     console.log(error);
   }
@@ -75,6 +108,19 @@ Combustible.abastecerCombustible = (body) => {
 
 Combustible.consultarCantidadCombustible = () => {
   try {
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+Combustible.obtenerCombustibles = async () => {
+  try {
+    const datos = await CombustibleModelo.findAll({
+      raw: true,
+      attributes: ["cantidad", "tipo", "precio"],
+    });
+
+    return datos;
   } catch (error) {
     console.log(error);
   }

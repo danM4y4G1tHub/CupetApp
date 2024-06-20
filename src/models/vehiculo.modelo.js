@@ -46,27 +46,49 @@ TicketModelo.belongsTo(VehiculoModelo, {
 //** Definición de los métodos de la tabla Vehiculo
 const Vehiculo = {};
 
-Vehiculo.crearVehiculo = (body) => {
+Vehiculo.crearVehiculo = async (body) => {
   try {
-    VehiculoModelo.create(
-      body.modelo,
-      body.categoria,
-      body.propiedad,
-      body.tipo,
-      body.matricula,
-      body.capacidad,
-      body.idUser,
-    );
+    const vehiculo = await VehiculoModelo.create(body);
+
+    return {
+      idV: vehiculo.id,
+      modelo: vehiculo.modelo,
+      categoria: vehiculo.categoria,
+      propiedad: vehiculo.propiedad,
+      tipo: vehiculo.tipo,
+      matricula: vehiculo.matricula,
+      capacidad: vehiculo.capacidad,
+      idUser: vehiculo.idUser,
+      creado: true,
+    };
   } catch (error) {
     console.log(error);
-    return false;
   }
-  return true;
 };
 
 Vehiculo.obtenerDatosVehiculo = (idUser) => {
   try {
     const datos = VehiculoModelo.findByPk(idUser);
+    return datos;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+Vehiculo.obtenerVehiculos = () => {
+  try {
+    const datos = VehiculoModelo.findAll({
+      raw: true,
+      attributes: [
+        "modelo",
+        "categoria",
+        "propiedad",
+        "tipo",
+        "matricula",
+        "capacidad",
+      ],
+    });
+
     return datos;
   } catch (error) {
     console.log(error);

@@ -18,68 +18,71 @@
               <input
                 type="text"
                 class="form-control"
-                id="floatingInput"
-                placeholder="Nombre"
+                id="modelo"
+                name="modelo"
+                placeholder="Modelo"
               />
-              <label for="floatingInput">Modelo</label>
+              <label for="modelo">Modelo</label>
             </div>
             <div class="row g-2">
               <div class="col-md">
                 <div class="form-floating">
-                  <select class="form-select" id="floatingSelectGrid">
+                  <select class="form-select" id="categoria" name="categoria">
                     <option selected></option>
-                    <option value="1">Automovil</option>
-                    <option value="2">Motocicleta</option>
-                    <option value="3">Camión</option>
-                    <option value="4">Omnibus</option>
+                    <option value="Automovil">Automovil</option>
+                    <option value="Motocicleta">Motocicleta</option>
+                    <option value="Camión">Camión</option>
+                    <option value="Omnibus">Omnibus</option>
                   </select>
-                  <label for="floatingSelectGrid">Categoría</label>
+                  <label for="categoria">Categoría</label>
                 </div>
               </div>
               <div class="col-md">
                 <div class="form-floating">
-                  <select class="form-select" id="floatingSelectGrid">
+                  <select class="form-select" id="propiedad" name="propiedad">
                     <option selected></option>
-                    <option value="1">Estatal</option>
-                    <option value="2">Particular</option>
+                    <option value="Estatal">Estatal</option>
+                    <option value="Particular">Particular</option>
                   </select>
-                  <label for="floatingSelectGrid">Propiedad</label>
+                  <label for="propiedad">Propiedad</label>
                 </div>
               </div>
             </div>
             <div class="form-floating">
-              <select class="form-select" id="floatingSelectGrid">
+              <select class="form-select" id="tipo" name="tipo">
                 <option selected></option>
-                <option value="1">Diesel Regular</option>
-                <option value="2">Gasolina B94</option>
-                <option value="2">Gasolina B90</option>
-                <option value="2">Gasolina B83</option>
+                <option value="Diesel Regular">Diesel Regular</option>
+                <option value="Gasolina B94">Gasolina B94</option>
+                <option value="Gasolina B90">Gasolina B90</option>
+                <option value="Gasolina B83">Gasolina B83</option>
               </select>
-              <label for="floatingSelectGrid">Tipo de Combustible</label>
+              <label for="tipo">Tipo de Combustible</label>
             </div>
             <div class="form-floating">
               <input
                 type="text"
                 class="form-control"
-                id="floatingInput"
+                id="matrícula"
+                name="matricula"
                 placeholder="Matrícula"
               />
-              <label for="floatingInput">Matrícula</label>
+              <label for="matricula">Matrícula</label>
             </div>
             <div class="form-floating">
               <input
                 type="text"
                 class="form-control"
-                id="floatingInput"
-                placeholder="Matrícula"
+                id="capacidad"
+                name="capacidad"
+                placeholder="Capacidad"
               />
-              <label for="floatingInput">Capacidad de Combustible</label>
+              <label for="capacidad">Capacidad de Combustible</label>
             </div>
           </div>
           <button
             class="w-100 btn btn-lg btn-success mt-3"
             type="submit"
-          >Siguiente</button>
+          >Enviar</button>
         </form>
       </div>
     </div>

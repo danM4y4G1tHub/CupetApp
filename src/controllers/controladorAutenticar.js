@@ -14,16 +14,31 @@ ControladorAutenticar.autenticar = (req, res, next) => {
 };
 
 ControladorAutenticar.cargarPanelControl = async (req, res) => {
+  // Toma los datos del usuario que se autentico
   const { user } = req;
 
-  if (user.rol === "Administrador") {
-    res.render("Admin/panelControlAdmin");
-  }
-  if (user.rol === "Dependiente") {
-    res.render("Dependiente/panelControlAdmin");
-  }
-  if (user.rol === "Cliente") {
-    res.render("Client/panelControlAdmin");
+  // Verifica si el usuario es nuevo o no
+  if (user === null) {
+    const rolU = req.query.rolU;
+    if (rolU === "Administrador") {
+      res.render("panelControl", { admin: true, login: true });
+    }
+    if (rolU === "Dependiente") {
+      res.render("panelControl", { dependiente: true, login: true });
+    }
+    if (rolU === "Cliente") {
+      res.render("panelControl", { cliente: true, login: true });
+    }
+  } else {
+    if (user.rol === "Administrador") {
+      res.render("panelControl", { admin: true, login: true });
+    }
+    if (user.rol === "Dependiente") {
+      res.render("panelControl", { dependiente: true, login: true });
+    }
+    if (user.rol === "Cliente") {
+      res.render("panelControl", { cliente: true, login: true });
+    }
   }
 };
 

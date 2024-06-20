@@ -54,7 +54,6 @@ const UsuarioModelo = sequelize.define(
 UsuarioModelo.beforeCreate(async (user) => {
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(user.password, saltRounds);
-  console.log({ user, hashedPassword });
   user.password = hashedPassword;
 });
 
@@ -91,20 +90,23 @@ FacturaCompraModelo.belongsTo(UsuarioModelo, {
 //** Definición de los métodos de la tabla Usuario
 const Usuario = {};
 
-Usuario.crearUsuario = async (usuario) => {
+Usuario.crearUsuario = async (cuenta) => {
   try {
-    await UsuarioModelo.create({
-      nombre: usuario.nombre,
-      apellidos: usuario.apellidos,
-      CI: usuario.CI,
-      direccion: usuario.direccion,
-      telefono: usuario.telefono,
-      email: usuario.email,
-      usuario: usuario.usuario,
-      password: usuario.password,
-      rol: "Administrador",
+    const newUser = await UsuarioModelo.create({
+      nombre: cuenta.nombre,
+      apellidos: cuenta.apellidos,
+      CI: cuenta.CI,
+      direccion: cuenta.direccion,
+      telefono: cuenta.telefono,
+      email: cuenta.email,
+      usuario: cuenta.user,
+      password: cuenta.password,
+      rol: "Cliente",
     });
-    return true;
+
+    if (newUser === null) return false;
+
+    return { rolU: newUser.rol, creado: true };
   } catch (error) {
     console.log(error);
     return false;
@@ -117,6 +119,7 @@ Usuario.validarUsuario = async (usuario) => {
       where: {
         usuario,
       },
+      raw: true,
       attributes: ["id", "usuario", "rol"],
     });
     if (user) {
@@ -141,7 +144,6 @@ Usuario.validarPassword = async (usuario, password) => {
       raw: true,
       attributes: ["password"],
     });
-    console.log({ pass });
     const correcto = await bcrypt.compare(password, pass.password);
     if (correcto) return true;
 
@@ -153,11 +155,10 @@ Usuario.validarPassword = async (usuario, password) => {
 
 Usuario.obtenerUsuario = async (id) => {
   try {
-    const datos = await UsuarioModelo.findByPk(id, {
+    return await UsuarioModelo.findByPk(id, {
       attributes: ["id", "usuario", "rol"],
+      raw: true,
     });
-
-    return datos;
   } catch (error) {
     console.log(error);
   }
@@ -165,11 +166,22 @@ Usuario.obtenerUsuario = async (id) => {
 
 Usuario.obtenerUsuarios = async () => {
   try {
-    const datos = await UsuarioModelo.findAll();
-    console.log(`Datos de los usuarios: ${datos}`);
-
-    // return datos.defaultValue;
-  } catch (error) {}
+    const datos = await UsuarioModelo.findAll({
+      raw: true,
+      attributes: [
+        "id",
+        "nombre",
+        "apellidos",
+        "CI",
+        "direccion",
+        "telefono",
+        "rol",
+      ],
+    });
+    return datos;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 Usuario.actualizarUsuario = async (id, usuario, password) => {
@@ -178,6 +190,17 @@ Usuario.actualizarUsuario = async (id, usuario, password) => {
 
 Usuario.eliminarUsuario = async (id) => {
   return true;
+};
+
+Usuario.obtenerNombre = async (id) => {
+  try {
+    return await UsuarioModelo.findByPk(id, {
+      raw: true,
+      attributes: ["nombre"],
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = {

@@ -1,7 +1,7 @@
 const { Usuario } = require("../models/usuario.modelo");
 
 const ControladorUsuario = {};
-const usuario = {
+const cuenta = {
   nombre: "",
   apellidos: "",
   CI: "",
@@ -12,25 +12,22 @@ const usuario = {
   password: "",
 };
 
-ControladorUsuario.vistaRegistrarCliente = (req, res) => {
+ControladorUsuario.vistaRegistrarCliente = (_, res) => {
   res.render("registrarCliente", { layout: "login" });
 };
 
 ControladorUsuario.registrarCliente = async (req, res) => {
-  usuario.nombre = req.body.nombre;
-  usuario.apellidos = req.body.apellidos;
-  usuario.CI = req.body.CI;
-  usuario.direccion = req.body.direccion;
-  usuario.telefono = req.body.telefono;
-  usuario.email = req.body.email;
+  ControladorUsuario.armarDatosCliente(req);
   res.render("registrarUsuario", { layout: "login" });
 };
 
 ControladorUsuario.registrarUsuario = async (req, res) => {
-  usuario.usuario = req.body.usuario;
-  usuario.password = req.body.password;
-  if (await Usuario.crearUsuario(usuario)) {
-    res.redirect("cargar-panel-control");
+  ControladorUsuario.armarDatos(req, "");
+  const { rolU, creado } = await Usuario.crearUsuario(cuenta);
+  if (creado) {
+    res.redirect("cargar-panel-control?rol=" + rolU);
+  } else {
+    // TODO: crear modal con Notificaciones de ERROR
   }
 };
 
@@ -46,9 +43,23 @@ ControladorUsuario.buscarUsuario = (req, res) => {
   res.render("buscar");
 };
 
-ControladorUsuario.listarUsuarios = async (req, res) => {
+ControladorUsuario.listarUsuarios = async (_, res) => {
   const datos = await Usuario.obtenerUsuarios();
-  res.render("Admin/panelControlAdmin", { datos });
+  res.render("panelControl", { datos, admin: true, user: true });
+};
+
+ControladorUsuario.armarDatosCliente = (req) => {
+  cuenta.nombre = req.body.nombre;
+  cuenta.apellidos = req.body.apellidos;
+  cuenta.CI = req.body.CI;
+  cuenta.direccion = req.body.direccion;
+  cuenta.telefono = req.body.telefono;
+  cuenta.email = req.body.email;
+};
+
+ControladorUsuario.armarDatos = (req) => {
+  cuenta.user = req.body.usuario;
+  cuenta.password = req.body.password;
 };
 
 module.exports = { ControladorUsuario };

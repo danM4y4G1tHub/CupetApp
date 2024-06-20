@@ -29,17 +29,22 @@ const FacturaRecepcionModelo = sequelize.define(
 // Definición de los métodos de la tabla FacturaRecepcion
 const FacturaRecepcion = {};
 
-FacturaRecepcion.crearFacturaRecepcion = (body) => {
+FacturaRecepcion.crearFacturaRecepcion = async (body) => {
   try {
-    FacturaRecepcionModelo.create(
-      body.nombreEstablecimiento,
-      body.nombreDistribuidor,
-      body.nombreAdministrador,
-      body.cantidadCombustible,
-      body.idUser,
-      body.idComb,
+    const datos = await FacturaRecepcionModelo.create(
+      {
+        nombreEstablecimiento: "Oro Negro",
+        nombreDistribuidor: body.nombreDistribuidor,
+        nombreAdministrador: body.nombreAdministrador,
+        cantidadCombustible: body.cantidad,
+        idComb: body.idComb,
+      },
+      {
+        raw: true,
+      },
     );
-    return true;
+    console.log({ datos });
+    // return true;
   } catch (error) {
     console.log(error);
   }
@@ -52,8 +57,10 @@ FacturaRecepcion.actualizarFacturaRecepcion = (body) => {
   }
 };
 
-FacturaRecepcion.obtenerDatosFacturaRecepcion = (id) => {
+FacturaRecepcion.obtenerFacturasRecepcion = async () => {
   try {
+    const datos = await FacturaRecepcionModelo.findAll({ raw: true });
+    return datos;
   } catch (error) {
     console.log(error);
   }

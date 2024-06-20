@@ -1,14 +1,24 @@
 import routesLabels from "./constants/routesLabels.js";
 
 const breadcrumbHtml = document.getElementById("breadcrumb");
-
-// Crear y agregar el elemento "Inicio" antes del ciclo
+// Crear el elemento <i> para el icono
 const inicioListItem = document.createElement("li");
 inicioListItem.className = "breadcrumb-item"; // Añadir la clase breadcrumb-item
 const inicioLink = document.createElement("a");
 inicioLink.href = "/";
-inicioLink.textContent = "Inicio";
+inicioLink.textContent = "Inicio"; // Texto del enlace
+
+// Crear el elemento <i> para el icono
+const inicioIcon = document.createElement("i");
+inicioIcon.className = "bi bi-signpost-split-fill"; // Clase del icono
+
+// Agregar el icono al enlace
+inicioLink.prepend(inicioIcon);
+
+// Agregar el enlace al elemento <li>
 inicioListItem.appendChild(inicioLink);
+
+// Insertar el elemento <li> al principio del breadcrumb
 breadcrumbHtml.insertBefore(inicioListItem, breadcrumbHtml.firstChild);
 
 const pathName = window.location.pathname;
@@ -16,8 +26,6 @@ const pathNameSplitted = pathName.split("/");
 
 pathNameSplitted.forEach((path, index) => {
   if (!path) return;
-
-  const href = pathName.split(path)[0] + path;
 
   // Creamos el elemento <li> con la clase breadcrumb-item
   const listItem = document.createElement("li");
@@ -28,8 +36,8 @@ pathNameSplitted.forEach((path, index) => {
 
   // Creamos el elemento <a> o <span> para el nombre de la ruta
   let linkOrSpan = document.createElement(isActive ? "span" : "a"); // Si es el último, usamos span, de lo contrario, un enlace
-  linkOrSpan.href = href; // Establecemos el href solo si no es el último elemento
-  linkOrSpan.textContent = routesLabels[path]; // Asignamos el texto del nombre de la ruta
+  linkOrSpan.href = pathName.split(path)[0] + path; // Establecemos el href solo si no es el último elemento
+  linkOrSpan.textContent = routesLabels[path] || path; // Asignamos el texto del nombre de la ruta
 
   // Si el elemento es activo, añadimos el atributo aria-current="page"
   if (isActive) {

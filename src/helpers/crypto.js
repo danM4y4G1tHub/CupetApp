@@ -1,6 +1,4 @@
-const { log } = require("console");
 const crypto = require("crypto");
-const { password } = require("pg/lib/defaults");
 
 // * Datos necesarios para encriptar la contraseña
 const algoritmo = "aes-256-cbc";

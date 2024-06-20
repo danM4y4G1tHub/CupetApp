@@ -1,0 +1,75 @@
+<div class="row mt-4">
+  <div class="col-md-4 offset-md-4">
+    <div class="card">
+      <div class="card-header text-center">
+        <h3>Recepción de Combustible</h3>
+      </div>
+      <div class="card-body text-center">
+        <form
+          id="formulario-usuario"
+          action="/recepcionar-combustible"
+          name="registro"
+          method="post"
+        >
+          <img
+            class="mb-4"
+            src="/img/gas-2.png"
+            alt=""
+            height="100"
+            width="100"
+          />
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="nombreDistribuidor"
+                name="nombreDistribuidor"
+                placeholder="Nombre del Abastecedor"
+              />
+              <label for="nombreDistribuidor">Nombre del Abastecedor</label>
+              <p id="mensaje-nombre"><span id="infoNombre"></span></p>
+            </div>
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="cantidad"
+                name="cantidad"
+                placeholder="Cantidad"
+              />
+              <label for="cantidad">Cantidad</label>
+              <p id="mensaje-usuario"><span id="info"></span></p>
+            </div>
+            <div class="form-floating">
+              <select class="form-select" id="tipo" name="tipo">
+                <option selected></option>
+                <option value="Diesel Regular">Diesel Regular</option>
+                <option value="Gasolina B94">Gasolina B94</option>
+                <option value="Gasolina B90">Gasolina B90</option>
+                <option value="Gasolina B83">Gasolina B83</option>
+              </select>
+              <label for="tipo">Tipo de Combustible</label>
+            </div>
+            <p id="mensaje-password"><span id="fortaleza"></span></p>
+          </div>
+          {{! <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="precio"
+              name="precio"
+              placeholder="Precio"
+            />
+            <label for="precio">Precio</label>
+            <p id="mensaje-usuario"><span id="info"></span></p>
+          </div> }}
+          <button
+            class="w-100 btn btn-lg btn-success mt-3"
+            type="submit"
+          >Enviar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
