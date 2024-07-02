@@ -66,9 +66,14 @@ Vehiculo.crearVehiculo = async (body) => {
   }
 };
 
-Vehiculo.obtenerDatosVehiculo = (idUser) => {
+Vehiculo.obtenerDatosVehiculo = async (idUser) => {
   try {
-    const datos = VehiculoModelo.findByPk(idUser);
+    const datos = await VehiculoModelo.findOne({
+      where: {
+        idUser,
+      },
+      raw: true,
+    });
     return datos;
   } catch (error) {
     console.log(error);
@@ -90,6 +95,37 @@ Vehiculo.obtenerVehiculos = () => {
     });
 
     return datos;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+Vehiculo.contarVehiculos = async () => {
+  try {
+    const datos = await VehiculoModelo.findAll();
+    const vehiculos = {
+      autos: 0,
+      motos: 0,
+      camiones: 0,
+      omnibuses: 0,
+    };
+
+    datos.forEach((vehiculo) => {
+      if (vehiculo.categoria === "Automovil") {
+        vehiculos.autos++;
+      }
+      if (vehiculo.categoria === "Motocicleta") {
+        vehiculos.motos++;
+      }
+      if (vehiculo.categoria === "Camión") {
+        vehiculos.camiones++;
+      }
+      if (vehiculo.categoria === "Automovil") {
+        vehiculos.omnibuses++;
+      }
+    });
+
+    return vehiculos;
   } catch (error) {
     console.log(error);
   }

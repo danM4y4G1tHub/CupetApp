@@ -1,3 +1,4 @@
+{{! <i class="bi bi-speedometer2"></i> : dashboard}}
 {{! <i class="bi bi-filetype-pdf"></i> :pdf}}
 {{! <i class="bi bi-exclamation-octagon-fill"></i> :información}}
 {{! <i class="bi bi-credit-card-fill"></i> :tarjeta combustible}}

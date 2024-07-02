@@ -1,6 +1,16 @@
 {
   "cSpell.language": "en,es-ES",
-  "cSpell.words": ["Automovil", "Cupet", "Inicialización"],
+  "cSpell.words": [
+    "Automovil",
+    "Cupet",
+    "descripcion",
+    "Inicialización",
+    "Opeacion",
+    "porciento",
+    "porcientos",
+    "Recepcion",
+    "vehiculos"
+  ],
   "workbench.list.horizontalScrolling": false,
   "workbench.list.scrollByPage": false
 }

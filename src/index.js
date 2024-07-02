@@ -6,7 +6,6 @@ const session = require("express-session");
 const { sequelize, sessionStore } = require("./database/db");
 const { urlencoded, json } = require("express");
 const { passport } = require("./helpers/passport");
-const { encriptar, coinciden } = require("./helpers/crypto.js");
 
 const app = express();
 
@@ -63,6 +62,9 @@ app.use(express.static(path.join(__dirname, "public")));
 /*
  * Servidor y conexión a la Base de Datos
  */
+
+require("./models/combustible.modelo.js");
+require("./models/ticket.modelo.js");
 
 async function main() {
   try {

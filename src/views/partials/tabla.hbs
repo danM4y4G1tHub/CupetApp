@@ -10,6 +10,7 @@
           <th scope="col">Dirección</th>
           <th scope="col">Teléfono</th>
           <th scope="col">Rol</th>
+          <th scope="col">Operación</th>
         </tr>
       </thead>
       {{#each datos}}
@@ -20,6 +21,35 @@
           <td>{{this.direccion}}</td>
           <td>{{this.telefono}}</td>
           <td>{{this.rol}}</td>
+          {{#if this.editable}}
+            <td>
+              <form action="/eliminar-usuario" method="post">
+                <input type="hidden" value="{{this.id}}" name="id">
+                <button
+                  class="btn btn-secondary bg-danger"
+                  type="submit"
+                  aria-expanded="false"
+                >
+                <i class="bi bi-trash3-fill"></i>
+                </button>
+              </form>
+            </td>
+            {{else}}
+              <td>
+                <form action="/eliminar-usuario" method="post">
+                  <input type="hidden" value="{{this.id}}" name="id">
+                  <button
+                    class="btn btn-secondary bg-danger"
+                    type="submit"
+                    aria-expanded="false"
+                    disabled
+                  >
+                  <i class="bi bi-trash3-fill"></i>
+                  </button>
+                </form>
+              </td>
+
+          {{/if}}
         </tr>
       {{/each}}
     </table>
@@ -95,6 +125,29 @@
           <td>{{this.nombreAdministrador}}</td>
           <td>{{this.cantidadCombustible}}</td>
           <td>{{this.tipo}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
+{{/if}}
+
+{{#if traza}}
+  <h3>Datos de las Trazas de Combustible del Cupet
+    {{nombreEstablecimiento}}</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Tipo de Operación</th>
+        </tr>
+      </thead>
+      {{#each datos}}
+        <tr>
+          <td>{{this.fecha}}</td>
+          <td>{{this.descripcion}}</td>
+          <td>{{this.tipoOperacion}}</td>
         </tr>
       {{/each}}
     </table>

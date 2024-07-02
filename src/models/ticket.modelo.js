@@ -14,7 +14,7 @@ const TicketModelo = sequelize.define(
       type: DataTypes.DATE,
     },
     estado: {
-      type: DataTypes.ENUM("Activo", "Anulado", "Cancelado"),
+      type: DataTypes.ENUM("Activo", "Pendiente", "Anulado", "Cancelado"),
       allowNull: false,
     },
   },
@@ -24,8 +24,19 @@ const TicketModelo = sequelize.define(
 // Definición de los métodos de la tabla Ticket
 const Ticket = {};
 
-Ticket.crearTicket = (body) => {
+Ticket.crearTicket = async (body) => {
   try {
+    const ticket = await TicketModelo.create({
+      fecha: body.fecha,
+      estado: body.estado,
+      idVe: body.idV,
+      idUser: body.idU,
+      idComb: body.idC,
+    });
+    if (ticket != null) {
+      return true;
+    }
+    return false;
   } catch (error) {
     console.log(error);
   }
@@ -38,8 +49,36 @@ Ticket.cambiarEstado = (body) => {
   }
 };
 
-Ticket.obtenerDatosTicket = (body) => {
+Ticket.obtenerDatosTicket = async (idU) => {
   try {
+    const datos = await TicketModelo.findOne({
+      where: { idUser: idU },
+      raw: true,
+    });
+    return datos;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+Ticket.contarTickets = async () => {
+  try {
+    const datos = await TicketModelo.findAll();
+    const tickets = {
+      activos: 0,
+      anulados: 0,
+    };
+
+    datos.forEach((ticket) => {
+      if (ticket.estado === "Activo") {
+        tickets.activos++;
+      }
+      if (ticket.estado === "") {
+        tickets.anulados++;
+      }
+    });
+
+    return tickets;
   } catch (error) {
     console.log(error);
   }

@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const { VehiculoModelo } = require("./vehiculo.modelo");
 const { TicketModelo } = require("./ticket.modelo");
 const { FacturaCompraModelo } = require("./facturaCompra.modelo");
+const { hashearPassword } = require("../helpers/crypto");
 
 //** Definición de la tabla Usuario
 const UsuarioModelo = sequelize.define(
@@ -92,17 +93,22 @@ const Usuario = {};
 
 Usuario.crearUsuario = async (cuenta) => {
   try {
-    const newUser = await UsuarioModelo.create({
-      nombre: cuenta.nombre,
-      apellidos: cuenta.apellidos,
-      CI: cuenta.CI,
-      direccion: cuenta.direccion,
-      telefono: cuenta.telefono,
-      email: cuenta.email,
-      usuario: cuenta.user,
-      password: cuenta.password,
-      rol: "Cliente",
-    });
+    let newUser = null;
+    if (cuenta.rol === "") {
+      newUser = await UsuarioModelo.create({
+        nombre: cuenta.nombre,
+        apellidos: cuenta.apellidos,
+        CI: cuenta.CI,
+        direccion: cuenta.direccion,
+        telefono: cuenta.telefono,
+        email: cuenta.email,
+        usuario: cuenta.usuario,
+        password: cuenta.password,
+        rol: "Cliente",
+      });
+    } else {
+      newUser = await UsuarioModelo.create(cuenta);
+    }
 
     if (newUser === null) return false;
 
@@ -184,20 +190,61 @@ Usuario.obtenerUsuarios = async () => {
   }
 };
 
-Usuario.actualizarUsuario = async (id, usuario, password) => {
-  return true;
+Usuario.actualizarUsuario = async (body) => {
+  try {
+    const nPass = await hashearPassword(body.password);
+    const datos = await UsuarioModelo.update(
+      {
+        password: nPass,
+      },
+      {
+        where: { usuario: body.usuario },
+      },
+    );
+    if (datos !== null) {
+      return true;
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 Usuario.eliminarUsuario = async (id) => {
-  return true;
+  try {
+    await UsuarioModelo.destroy({
+      where: {
+        id,
+      },
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 Usuario.obtenerNombre = async (id) => {
   try {
     return await UsuarioModelo.findByPk(id, {
       raw: true,
-      attributes: ["nombre"],
+      attributes: ["nombre", "apellidos"],
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+Usuario.contarUsuarios = async () => {
+  try {
+    const datos = await UsuarioModelo.findAll({ raw: true });
+    const clientes = datos.forEach((user) => {
+      let clientes = 0;
+      if (user.rol === "Cliente") {
+        clientes++;
+      }
+      return clientes;
+    });
+
+    return clientes;
   } catch (error) {
     console.log(error);
   }

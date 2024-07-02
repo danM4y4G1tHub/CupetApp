@@ -27,16 +27,6 @@ const CombustibleModelo = sequelize.define(
   { timestamps: false },
 );
 
-// Estableciendo relación entre las tablas Combustible y Ticket
-CombustibleModelo.hasMany(TicketModelo, {
-  foreignKey: "idComb",
-  sourceKey: "id",
-});
-TicketModelo.belongsTo(CombustibleModelo, {
-  foreignKey: "idComb",
-  targetId: "id",
-});
-
 // Estableciendo relación entre las tablas Combustible y FacturaRecepcion
 CombustibleModelo.hasMany(FacturaRecepcionModelo, {
   foreignKey: "idComb",
@@ -57,11 +47,49 @@ FacturaCompraModelo.belongsTo(CombustibleModelo, {
   targetId: "id",
 });
 
+// Estableciendo relación entre las tablas Combustible y Ticket
+CombustibleModelo.hasMany(TicketModelo, {
+  foreignKey: "idComb",
+  sourceKey: "id",
+});
+TicketModelo.belongsTo(CombustibleModelo, {
+  foreignKey: "idComb",
+  targetId: "id",
+});
+
 // Definición de los métodos de la tabla Combustible
 const Combustible = {};
 
-Combustible.despacharCombustible = (body) => {
+Combustible.crearCombustible = async (body) => {
   try {
+    await CombustibleModelo.create({
+      cantidad: body.cantidad,
+      tipo: body.tipo,
+      precio: body.precio,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+Combustible.despacharCombustible = async (body) => {
+  try {
+    const { id, cantidad } = await Combustible.obtenerCombustible(body);
+    let nueva = 0;
+    nueva += cantidad - Number(body.cantidad);
+    const datos = await CombustibleModelo.update(
+      {
+        cantidad: nueva,
+      },
+      {
+        where: { tipo: body.tipo },
+      },
+    );
+
+    if (datos === null) {
+      return { actualizado: false };
+    }
+    return { actualizado: true, idComb: id };
   } catch (error) {
     console.log(error);
   }
@@ -71,7 +99,7 @@ Combustible.obtenerCombustible = async (body) => {
   try {
     const comb = await CombustibleModelo.findOne({
       where: {
-        tipo: body.tipo,
+        tipo: body,
       },
       raw: true,
       attributes: ["id", "cantidad"],
@@ -106,24 +134,52 @@ Combustible.abastecerCombustible = async (body) => {
   }
 };
 
-Combustible.consultarCantidadCombustible = () => {
-  try {
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 Combustible.obtenerCombustibles = async () => {
   try {
     const datos = await CombustibleModelo.findAll({
       raw: true,
-      attributes: ["cantidad", "tipo", "precio"],
     });
 
     return datos;
   } catch (error) {
     console.log(error);
   }
+};
+
+Combustible.medirCombustibles = async () => {
+  const datos = await Combustible.obtenerCombustibles();
+  return Combustible.calcularPorcientos(datos);
+};
+
+Combustible.calcularPorcientos = (datos) => {
+  let porcientoB94 = 0;
+  let porcientoB90 = 0;
+  let porcientoB83 = 0;
+  let porcientoDiesel = 0;
+
+  datos.forEach((comb) => {
+    if (comb.tipo === "Gasolina B94") {
+      porcientoB94 = (comb.cantidad / 5000) * 100;
+    }
+    if (comb.tipo === "Gasolina B90") {
+      porcientoB90 = (comb.cantidad / 5000) * 100;
+    }
+    if (comb.tipo === "Gasolina B83") {
+      porcientoB83 = (comb.cantidad / 5000) * 100;
+    }
+    if (comb.tipo === "Gasolina B94") {
+      porcientoDiesel = (comb.cantidad / 5000) * 100;
+    }
+  });
+
+  const porcientos = {
+    B94: porcientoB94,
+    B90: porcientoB90,
+    B83: porcientoB83,
+    DR: porcientoDiesel,
+  };
+
+  return porcientos;
 };
 
 module.exports = {

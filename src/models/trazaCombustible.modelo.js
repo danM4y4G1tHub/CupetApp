@@ -26,20 +26,32 @@ const TrazaCombustibleModelo = sequelize.define("TrazaCombustible", {
 // Definición de los métodos de la tabla TrazaCombustible
 const TrazaCombustible = {};
 
-TrazaCombustible.crearTraza = (body) => {
+TrazaCombustible.crearTraza = async (body) => {
   try {
-    const fecha = new Date();
-    TrazaCombustibleModelo.create(
-      body.idUser,
-      fecha,
-      body.descripcion,
-      body.tipoOperacion,
-    );
+    await TrazaCombustibleModelo.create({
+      idUser: body.idUser,
+      fecha: new Date(),
+      descripcion: body.descripcion,
+      tipoOperacion: body.tipoOperacion,
+    });
     return true;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+TrazaCombustible.obtenerTrazas = async () => {
+  try {
+    const datos = await TrazaCombustibleModelo.findAll({
+      raw: true,
+    });
+
+    return datos;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = {
   TrazaCombustible,
-  TrazaCombustibleModelo,
 };

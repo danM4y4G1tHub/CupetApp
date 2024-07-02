@@ -3,7 +3,7 @@
     <ul class="nav flex-column">
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="#">
-          <i class="bi bi-gear"></i>
+          <i class="bi bi-speedometer2"></i>
           Panel de Control
         </a>
       </li>
@@ -13,6 +13,15 @@
             <i class="bi bi-plus-circle-fill"></i>
             Recibir Combustible
           </a>
+          <a class="nav-link" href="/registrar-dependiente">
+            <i class="bi bi-plus-circle-fill"></i>
+            Agregar Empleado
+          </a>
+          <hr class="dropdown-divider" />
+            <a class="nav-link" href="/editar-usuario">
+              <i class="bi bi-person-gear"></i>
+              Editar Perfil
+            </a>
           <hr class="dropdown-divider" />
         </li>
         <li class="nav-item">
@@ -45,6 +54,19 @@
             Listar Recepciones
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/listar-trazas">
+            <i class="bi bi-clipboard2-pulse-fill"></i>
+            Listar Trazas
+          </a>
+        </li>
+        <hr class="dropdown-divider" />
+        <li class="nav-item">
+          <a class="nav-link" href="/estadisticas">
+            <i class="bi bi-activity"></i>
+            Actividad de la Página
+          </a>
+        </li>
       {{/if}}
 
       {{#if dependiente}}
@@ -61,24 +83,6 @@
             Vehículos
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/listar-combustibles">
-            <i class="bi bi-fuel-pump"></i>
-            Combustibles
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/listar-ventas">
-            <i class="bi bi-currency-dollar"></i>
-            Ventas
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/listar-recepciones">
-            <i class="bi bi-receipt"></i>
-            Recepción
-          </a>
-        </li>
       {{/if}}
 
       {{#if cliente}}
@@ -90,13 +94,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/crear-ticket">
+          <a class="nav-link" href="/pedir-ticket">
             <i class="bi bi-ticket-detailed-fill"></i>
             Pedir Turno
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/editar-perfil">
+          <a class="nav-link" href="/editar-usuario">
             <i class="bi bi-person-gear"></i>
             Editar Perfil de Usuario
           </a>

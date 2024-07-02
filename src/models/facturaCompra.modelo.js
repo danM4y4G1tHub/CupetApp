@@ -37,6 +37,25 @@ FacturaCompra.actualizarFacturaCompra = (idUser) => {
   } catch (error) {}
 };
 
+FacturaCompra.obtenerVentas = async () => {
+  try {
+    const datos = await FacturaCompraModelo.findAll({ raw: true });
+
+    return datos;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+FacturaCompra.contarVentas = async () => {
+  try {
+    const datos = await FacturaCompra.obtenerVentas();
+    return datos.length;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   FacturaCompra,
   FacturaCompraModelo,

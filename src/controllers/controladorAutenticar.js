@@ -1,7 +1,7 @@
 const passport = require("passport");
 const ControladorAutenticar = {};
 
-ControladorAutenticar.autenticarUsuario = async (req, res) => {
+ControladorAutenticar.autenticarUsuario = (req, res) => {
   // Construye la vista del formulario para autenticarse
   res.render("autenticar", { layout: "login" });
 };
@@ -21,12 +21,15 @@ ControladorAutenticar.cargarPanelControl = async (req, res) => {
   if (user === null) {
     const rolU = req.query.rolU;
     if (rolU === "Administrador") {
+      res.toastr.success("Bienvenido a CupetApp");
       res.render("panelControl", { admin: true, login: true });
     }
     if (rolU === "Dependiente") {
+      res.toastr.success("Bienvenido a CupetApp");
       res.render("panelControl", { dependiente: true, login: true });
     }
     if (rolU === "Cliente") {
+      res.toastr.success('Bienvenido a CupetApp');
       res.render("panelControl", { cliente: true, login: true });
     }
   } else {
@@ -42,8 +45,8 @@ ControladorAutenticar.cargarPanelControl = async (req, res) => {
   }
 };
 
-ControladorAutenticar.cerrarSesion = (req, res) => {
-  req.logout(function (err) {
+ControladorAutenticar.cerrarSesion = async (req, res) => {
+  await req.logout(function (err) {
     if (err) {
       return next(err);
     }

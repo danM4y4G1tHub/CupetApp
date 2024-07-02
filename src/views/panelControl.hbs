@@ -3,23 +3,86 @@
 >
   <h1 class="h2">Panel de control: {{{dataUsuario.rol}}}</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
+    {{#if cliente}}
     <div class="btn-group me-2">
-      {{! <button
-          type="button"
-          class="btn btn-sm btn-outline-secondary"
-        >Share</button>
+      <form action="/ver-vehiculo" method="get">
         <button
-          type="button"
+          type="submit"
           class="btn btn-sm btn-outline-secondary"
-        >Export</button> }}
+        >Ver Vehículo</button>
+      </form>
+      <form action="/ver-ticket" method="get">
+        <button
+          type="submit"
+          class="btn btn-sm btn-outline-secondary"
+        >Ver Ticket</button>
+      </form>
     </div>
-    {{! <button
-        type="button"
-        class="btn btn-sm btn-outline-secondary dropdown-toggle"
-      >
-        <span data-feather="calendar"></span>
-        This week
-      </button> }}
+    {{/if}}
   </div>
 </div>
 {{>tabla}}
+
+{{#if cliente}}
+  {{#if vehiculo}}
+  <div class="card" style="width: 18rem;">
+    {{#if auto}}
+      <img 
+        src="/img/car.png" 
+        class="card-img-top" 
+        alt="Imagen de automovil" 
+        height="170"
+        width="120"
+      />
+    {{/if}}
+    {{#if moto}}
+      <img 
+        src="/img/bike.png" 
+        class="card-img-top" 
+        alt="Imagen de motocicleta"
+        height="170"
+        width="120"
+       />
+    {{/if}}
+    {{#if camion}}
+      <img 
+        src="/img/truck.png" 
+        class="card-img-top" 
+        alt="Imagen de camión"
+        height="170"
+        width="120"
+      />
+    {{/if}}
+    {{#if omnibus}}
+      <img 
+        src="/img/bus.png" 
+        class="card-img-top" 
+        alt="..."
+        height="170"
+        width="120"
+      />
+    {{/if}}
+    <div class="card-body text-center">
+      <h5 class="card-title">{{datos.categoria}}</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Modelo: {{datos.modelo}}</li>
+      <li class="list-group-item">Propiedad: {{datos.propiedad}}</li>
+      <li class="list-group-item">Tipo de combustible: {{datos.tipo}}</li>
+      <li class="list-group-item">Matrícula: {{datos.matricula}}</li>
+      <li class="list-group-item">Capacidad: {{datos.capacidad}} Lts</li>
+    </ul>
+  </div>
+  {{/if}}
+  {{#if ticket}}
+    <div class="card" style="width: 18rem;">
+      <div class="card-body text-center">
+        <h5 class="card-title">{{turnoC.categoria}}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Estado: {{turnoC.estado}}</li>
+        <li class="list-group-item">Fecha: {{turnoC.fecha}}</li>
+      </ul>
+    </div>
+  {{/if}}
+{{/if}}

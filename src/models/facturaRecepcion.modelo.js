@@ -31,7 +31,7 @@ const FacturaRecepcion = {};
 
 FacturaRecepcion.crearFacturaRecepcion = async (body) => {
   try {
-    const datos = await FacturaRecepcionModelo.create(
+    await FacturaRecepcionModelo.create(
       {
         nombreEstablecimiento: "Oro Negro",
         nombreDistribuidor: body.nombreDistribuidor,
@@ -43,8 +43,7 @@ FacturaRecepcion.crearFacturaRecepcion = async (body) => {
         raw: true,
       },
     );
-    console.log({ datos });
-    // return true;
+    return true;
   } catch (error) {
     console.log(error);
   }
@@ -61,6 +60,15 @@ FacturaRecepcion.obtenerFacturasRecepcion = async () => {
   try {
     const datos = await FacturaRecepcionModelo.findAll({ raw: true });
     return datos;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+FacturaRecepcion.contarRecepciones = async () => {
+  try {
+    const datos = await FacturaRecepcionModelo.findAll({ raw: true });
+    return datos.length;
   } catch (error) {
     console.log(error);
   }

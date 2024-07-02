@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+const bcrypt = require("bcryptjs");
 
 // * Datos necesarios para encriptar la contraseña
 const algoritmo = "aes-256-cbc";
@@ -36,7 +37,13 @@ const coinciden = (passwordClara, passwordOculta) => {
   return false;
 };
 
+const hashearPassword = async (password) => {
+  const saltRounds = 10;
+  return await bcrypt.hash(password, saltRounds);
+};
+
 module.exports = {
   encriptar,
   coinciden,
+  hashearPassword
 };
