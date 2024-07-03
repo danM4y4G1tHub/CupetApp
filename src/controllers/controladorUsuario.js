@@ -46,7 +46,7 @@ ControladorUsuario.registrarUsuarioDependiente = async (req, res) => {
   }
 };
 
-ControladorUsuario.vistaRegistrarCliente = (_, res) => {
+ControladorUsuario.vistaRegistrarCliente = async (_, res) => {
   res.render("registrarCliente", { layout: "login" });
 };
 

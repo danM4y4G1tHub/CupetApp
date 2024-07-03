@@ -2,7 +2,7 @@ const { Vehiculo } = require("../models/vehiculo.modelo");
 
 const ControladorVehiculo = {};
 
-ControladorVehiculo.vistaRegistrarVehiculo = (req, res) => {
+ControladorVehiculo.vistaRegistrarVehiculo = async (req, res) => {
   res.render("registrarVehiculo", { layout: "login" });
 };
 

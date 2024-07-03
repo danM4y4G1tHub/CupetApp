@@ -18,17 +18,17 @@ document
   .getElementById("formulario-usuario")
   .addEventListener("submit", async (event) => {
     event.preventDefault(); //! Evita el envío del formulario
-
+    validarUsuario();
+    validarPassword();
     //* Llama a las funciones que validan Usuario y Password
-    if (validarUsuario() && validarPassword()) {
-      try {
-        await fetch("/registrar-usuario", {
-          method: "POST",
-          body: formData,
-        });
-      } catch (error) {
-        console.error("Error en la solicitud:", error);
-      }
+
+    try {
+      await fetch("/registrar-usuario", {
+        method: "POST",
+        body: formData,
+      });
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
     }
   });
 
@@ -66,7 +66,7 @@ const validarPassword = () => {
     fort.innerHTML = "Fortaleza alta";
     pass.style.borderColor = "#198754";
     msgPass.style.color = "#198754";
-    msgPass.style.display = "block";
+    msgPass.style.display = "none";
 
     return true;
   } else if (largo == 0) {
@@ -76,16 +76,16 @@ const validarPassword = () => {
     msgPass.style.display = "block";
 
     return false;
-  } else if (largo == 8 && largo <= 10 && pass.value.match(expresion)) {
-    fort.innerHTML = "Fortaleza media";
-    pass.style.borderColor = "#ffc107";
-    msgPass.style.color = "#ffc107";
+  } else if (largo < 8 || largo > 15) {
+    fort.innerHTML = "Debe tener entre 8 y 15 caracteres";
+    pass.style.borderColor = "#dc3545";
+    msgPass.style.color = "#dc3545";
     msgPass.style.display = "block";
 
     return false;
   } else {
     fort.innerHTML =
-      "Debe tener algún: (*/=!.-+@$%&), Mayúsculas, minúsculas y números, ser >= 8 y <= 15";
+      "Debe tener algún: (*/=!.-+@$%&), Mayúsculas, minúsculas y números";
     pass.style.borderColor = "#dc3545";
     msgPass.style.color = "#dc3545";
     msgPass.style.display = "block";
